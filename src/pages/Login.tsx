@@ -1,6 +1,9 @@
 import React, { FC, ReactElement } from "react";
 import { MainFormLoginDiv, MainLoginDiv } from "./style/LoginStyle";
 import { Button, Checkbox, Form, Input } from "antd";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "@reduxjs/toolkit";
+import { RootState } from "../app/store";
 
 interface LoginProps {}
 
@@ -61,5 +64,21 @@ const Login: FC<LoginProps> = ({}): ReactElement => {
     </MainLoginDiv>
   );
 };
+
+// const actions: any = Object.assign({}, auth);
+
+// function mapStateToProps(state: RootState) {
+//   return {
+//     calculatorState: state.calculatorReducer,
+//   };
+// }
+
+// function mapDispatchToProps(dispatch: Dispatch) {
+//   return {
+//     actions: bindActionCreators(actions, dispatch),
+//   };
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 export default Login;

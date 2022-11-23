@@ -4,12 +4,20 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
+import { useAppDispatch } from "../app/hooks";
+import { login } from "../app/store/actions/user/userActions";
 
 interface LoginProps {}
 
 const Login: FC<LoginProps> = ({}): ReactElement => {
+  const dispatch = useAppDispatch();
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
+    let username = values.username;
+    let password = values.password;
+    let remember = values.remember;
+    dispatch(login(username, password, remember));
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -5,11 +5,14 @@ import {
   combineReducers,
 } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
-import userSlice from "./store/slice/user/userSlice";
+import { loadingSlice } from "./store/slice/user/loadingSlice";
+import { jwtSlice, userSlice } from "./store/slice/user/userSlice";
 
 const store = configureStore({
   reducer: {
+    jwt: jwtSlice.reducer,
     user: userSlice.reducer,
+    loading: loadingSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,

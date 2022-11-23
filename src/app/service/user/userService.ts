@@ -1,11 +1,10 @@
 import { UserModel } from "../../models/UserModel";
-import { loginApi, noAuthApi } from "../Api";
+import { authApi, loginApi, noAuthApi } from "../Api";
 
 export default {
   async getUser() {
-    var response = await noAuthApi().get("user");
+    var response = await authApi().get("api/auth/me");
     console.log(response);
-
     return response.data;
   },
 

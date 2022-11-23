@@ -1,7 +1,16 @@
+export interface RoleModel {
+  roleName: string;
+}
+
 export interface UserModel {
-  userId: number;
-  name: string;
+  id: number;
+  username: string;
   email: string;
+  authorities: RoleModel[];
+  enabled: boolean;
+  accountNonExpired: boolean;
+  credentialsNonExpired: boolean;
+  accountNonLocked: boolean;
 }
 
 export interface JWTResponseModel {

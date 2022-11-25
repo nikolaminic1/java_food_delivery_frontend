@@ -21,7 +21,8 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("access") != undefined) {
+    if (localStorage.getItem("access") !== "undefined") {
+      console.log(localStorage.getItem("access"));
       dispatch(getUserAction());
     }
   }, []);

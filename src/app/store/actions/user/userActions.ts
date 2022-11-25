@@ -3,7 +3,6 @@ import { ThunkAction } from "@reduxjs/toolkit";
 import store, { RootState } from "../../../store";
 import { JWTResponseModel, UserModel } from "../../../models/UserModel";
 import { authorizeUser, getUser } from "../../../service/user/userService";
-import { toggleLoading } from "../../slice/user/loadingSlice";
 
 export const loginAction = (data: object) => {
   return async () => {

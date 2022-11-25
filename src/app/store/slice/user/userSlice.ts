@@ -14,8 +14,6 @@ export const jwtSlice = createSlice({
   initialState: initialJwtState,
   reducers: {
     setJwt(state, action: PayloadAction<JWTResponseModel>) {
-      state.access_token = action.payload.access_token;
-      state.refresh_token = action.payload.refresh_token;
       console.log("jwt slice");
     },
   },
@@ -33,7 +31,6 @@ export const jwtSlice = createSlice({
         state.refresh_token = loadedJwt.refresh_token;
 
         localStorage.setItem("access", loadedJwt.access_token);
-        localStorage.setItem("refres", loadedJwt.refresh_token);
       })
       .addCase(authorizeUser.rejected, (state, action) => {
         state.status = "failed";
@@ -56,7 +53,6 @@ export const userSlice = createSlice({
         console.log("userSlice pending");
 
         state.status = "loading";
-        state.isAuthenticated = true;
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.status = "succeed";

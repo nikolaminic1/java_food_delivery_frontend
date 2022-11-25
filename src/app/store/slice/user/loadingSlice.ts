@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login } from "../../actions/user/userActions";
+import { authorizeUser } from "../../../service/user/userService";
+// import { login } from "../../actions/user/userActions";
 
 export const loadingSlice = createSlice({
   name: "loading",
@@ -7,11 +8,12 @@ export const loadingSlice = createSlice({
   reducers: {
     toggleLoading: (state) => !state,
   },
-  //   extraReducers: {
-  //     [login.pending]: () => true,
-  //     [login.fulfilled]: () => false,
-  //     [login.rejected]: () => false,
-  //   }
+  extraReducers: {
+    // [authorizeUser.pending]: () => true,
+    // [authorizeUser.fulfilled]: () => false,
+    // [authorizeUser.rejected]: () => false,
+  },
 });
 
 export const { toggleLoading } = loadingSlice.actions;
+export default loadingSlice.reducer;

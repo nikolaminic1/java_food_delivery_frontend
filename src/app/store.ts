@@ -12,7 +12,6 @@ const store = configureStore({
   reducer: {
     jwt: jwtSlice.reducer,
     user: userSlice.reducer,
-    loading: loadingSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,

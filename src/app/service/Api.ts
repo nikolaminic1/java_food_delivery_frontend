@@ -26,7 +26,7 @@ export function noAuthApi() {
 export function authApi() {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `JWT ${localStorage.getItem("access")}`,
+    Authorization: `Bearer ${localStorage.getItem("access")}`,
     Accept: "application/json",
   };
 

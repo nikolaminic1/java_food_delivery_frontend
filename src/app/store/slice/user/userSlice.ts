@@ -3,57 +3,73 @@ import {
   RoleModel,
   UserModel,
 } from "../../../models/UserModel";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { initialJwtState, initialUserState } from "../../../initial_state/user";
+import { loginApi } from "../../../service/Api";
+import { authorizeUser, getUser } from "../../../service/user/userService";
+import store from "../../../store";
 
-const initialRoleState: RoleModel = {
-  roleName: "",
-};
-
-const initialUserState: UserModel = {
-  id: 0,
-  username: "",
-  email: "",
-  authorities: [],
-  enabled: false,
-  accountNonExpired: false,
-  credentialsNonExpired: false,
-  accountNonLocked: false,
-};
-
-const initialJwtState: JWTResponseModel = {
-  access_token: "",
-  refresh_token: "",
-};
-
-const jwtSlice = createSlice({
+export const jwtSlice = createSlice({
   name: "jwt",
   initialState: initialJwtState,
   reducers: {
     setJwt(state, action: PayloadAction<JWTResponseModel>) {
       state.access_token = action.payload.access_token;
       state.refresh_token = action.payload.refresh_token;
-
-      localStorage.setItem("access", action.payload.access_token);
-      localStorage.setItem("refresh", action.payload.refresh_token);
+      console.log("jwt slice");
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(authorizeUser.pending, (state, action) => {
+        console.log("jwt slice pending");
+        state.status = "loading";
+      })
+      .addCase(authorizeUser.fulfilled, (state, action) => {
+        state.status = "succeed";
+        console.log("jwt slice fullfiled");
+        const loadedJwt = action.payload;
+        state.access_token = loadedJwt.access_token;
+        state.refresh_token = loadedJwt.refresh_token;
+
+        localStorage.setItem("access", loadedJwt.access_token);
+        localStorage.setItem("refres", loadedJwt.refresh_token);
+      })
+      .addCase(authorizeUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message || null;
+      });
   },
 });
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: "user",
   initialState: initialUserState,
   reducers: {
-    getUser(state, action: PayloadAction<UserModel>) {
+    setUser(state, action: PayloadAction<UserModel>) {
       state.id = action.payload.id;
-      state.username = action.payload.username;
-      state.email = action.payload.email;
-      state.authorities = action.payload.authorities;
-      state.enabled = action.payload.enabled;
-      state.accountNonExpired = action.payload.accountNonExpired;
-      state.credentialsNonExpired = action.payload.credentialsNonExpired;
-      state.accountNonLocked = action.payload.accountNonLocked;
     },
   },
-});
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUser.pending, (state, action) => {
+        console.log("userSlice pending");
 
-export { jwtSlice, userSlice };
+        state.status = "loading";
+        state.isAuthenticated = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = "succeed";
+        console.log("userSlice fullfiled");
+
+        const loadedUser = action.payload;
+        state.id = loadedUser.id;
+        state.username = loadedUser.username;
+        state.isAuthenticated = true;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.isAuthenticated = true;
+      });
+  },
+});

@@ -9,27 +9,26 @@ import { loginApi } from "../../../service/Api";
 import { authorizeUser, getUser } from "../../../service/user/userService";
 import store from "../../../store";
 
-export const userSlice = createSlice({
-  name: "user",
-  initialState: initialUserState,
+export const jwtSlice = createSlice({
+  name: "jwt",
+  initialState: initialJwtState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.pending, (state, action) => {
-        console.log("userSlice pending");
-
+      .addCase(authorizeUser.pending, (state, action) => {
+        console.log("jwt slice pending");
         state.status = "loading";
       })
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(authorizeUser.fulfilled, (state, action) => {
         state.status = "succeed";
-        console.log("userSlice fullfiled");
+        console.log("jwt slice fulfilled");
       })
-      .addCase(getUser.rejected, (state, action) => {
+      .addCase(authorizeUser.rejected, (state, action) => {
         state.status = "failed";
-        state.isAuthenticated = true;
+        state.error = action.error.message || null;
       });
   },
 });
 
-const reducer = userSlice.reducer;
+const reducer = jwtSlice.reducer;
 export default reducer;

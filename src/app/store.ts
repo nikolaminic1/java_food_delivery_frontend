@@ -5,9 +5,11 @@ import {
   combineReducers,
 } from "@reduxjs/toolkit";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { jwtSlice, userSlice } from "./store/slice/user/userSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import jwtSlice from "./store/slice/user/jwtSlice";
+import userSlice from "./store/slice/user/userSlice";
+import restaurantSlice from "./store/slice/restaurant/restaurantSlice";
 
 const persistConfig = {
   key: "root",
@@ -15,8 +17,9 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  jwt: jwtSlice.reducer,
-  user: userSlice.reducer,
+  jwt: jwtSlice,
+  user: userSlice,
+  restaurants: restaurantSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

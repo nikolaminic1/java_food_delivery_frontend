@@ -20,20 +20,20 @@ const { Header, Content, Sider } = Layout;
 const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (localStorage.getItem("access") !== "undefined") {
-      console.log(localStorage.getItem("access"));
-      dispatch(getUserAction());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("access") !== "undefined") {
+  //     console.log(localStorage.getItem("access"));
+  //     dispatch(getUserAction());
+  //   }
+  // }, []);
   return (
     <div>
       <Navbar />
-      <Layout>
+      <LayoutDiv>
         <Content>
           <div className="main-content-div">{children}</div>
         </Content>
-      </Layout>
+      </LayoutDiv>
     </div>
   );
 };

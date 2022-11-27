@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import store from "./app/store";
 import { persistor } from "./app/store";
+import Restaurants from "./pages/Restaurants";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                 <CLayout>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/restaurants" element={<Restaurants />} />
 
                     {/* <Route path="users/*" element={<Login />} /> */}
 

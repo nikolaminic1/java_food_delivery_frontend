@@ -7,7 +7,7 @@ export function loginApi() {
   };
 
   return axios.create({
-    baseURL: "http://localhost:8888/login",
+    baseURL: "http://localhost:8070/login",
     headers: headers,
   });
 }
@@ -18,7 +18,18 @@ export function noAuthApi() {
     Accept: "application/json",
   };
   return axios.create({
-    baseURL: "http://localhost:8888/api/auth/",
+    baseURL: "http://localhost:8070/api/auth/",
+    headers: headers,
+  });
+}
+
+export function genericApi() {
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  };
+  return axios.create({
+    baseURL: "http://localhost:8070/",
     headers: headers,
   });
 }
@@ -31,7 +42,7 @@ export function authApi() {
   };
 
   return axios.create({
-    baseURL: "http://localhost:8888/api/auth/",
+    baseURL: "http://localhost:8070/api/auth/",
     headers: headers,
   });
 }

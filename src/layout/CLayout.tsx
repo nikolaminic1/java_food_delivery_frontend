@@ -9,6 +9,7 @@ import {
   getUserAction,
   loginAction,
 } from "../app/store/actions/user/userActions";
+import Sidebar from "./Sidebar";
 
 interface CLayoutProps {
   title?: string;
@@ -20,6 +21,8 @@ const { Header, Content, Sider } = Layout;
 const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   const dispatch = useAppDispatch();
 
+  let w = window.innerWidth;
+
   // useEffect(() => {
   //   if (localStorage.getItem("access") !== "undefined") {
   //     console.log(localStorage.getItem("access"));
@@ -28,7 +31,7 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   // }, []);
   return (
     <div>
-      <Navbar />
+      {w > 760 ? <Navbar /> : <Sidebar />}
       <LayoutDiv>
         <Content>
           <div className="main-content-div">{children}</div>

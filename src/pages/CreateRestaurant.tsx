@@ -5,8 +5,12 @@ import { message, Upload } from "antd";
 import type { UploadProps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { createRestaurant } from "../app/store/actions/restaurant/createRestaurantActions";
-import { InnerFormDivCreateRestaurant } from "./style/RestaurantStyle";
+import {
+  FormWrapper,
+  InnerFormDivCreateRestaurant,
+} from "./style/RestaurantStyle";
 import TagFormRestaurantCreate from "../components/restaurant/TagFormRestaurantCreate";
+import Schema from "async-validator";
 
 const { Option } = Select;
 
@@ -25,16 +29,8 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
-  const onClick = (values: any) => {
-    setLoading(true);
-    form
-      .validateFields()
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
+  Schema.warning = function (error) {
+    console.log(error);
   };
 
   const asyncRule = (fn: any, message: any) => {
@@ -47,14 +43,25 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   const validateName = (_: any, value: any) => {
     console.log("validate");
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        value
-          ? resolve(() => {
-              console.log("loging");
-            })
-          : reject(new Error("Should accept agreement"));
-      }, 1000);
+      value
+        ? resolve(() => {
+            console.log("resolve");
+          })
+        : reject(new Error("Should accept agreement"));
     });
+    // value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+  };
+
+  const onClick = (values: any) => {
+    setLoading(true);
+    form
+      .validateFields()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   };
 
   const props: UploadProps = {
@@ -90,7 +97,7 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
     }
   };
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: object) => {
     console.log(values);
     // dispatch(createRestaurant(values));
   };
@@ -147,49 +154,38 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
             </Upload>
           </Form.Item>
         </Form> */}
-        <Form
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Restaurant name"
-            name="restaurant_name"
-            rules={[
-              {
-                required: true,
-                message: "Please input name of your restaurant!",
-              },
-              asyncRule(validateName, "hahahah"),
-            ]}
+        <FormWrapper>
+          <Form
+            name="basic"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Restaurant name"
+              name="restaurant_name"
+              rules={[asyncRule(validateName, "This field is required")]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Restaurant description"
+              name="description"
+              rules={[asyncRule(validateName, "This field is required")]}
+            >
+              <Input.TextArea />
+            </Form.Item>
 
-          <Form.Item
-            label="Restaurant description"
-            name="description"
-            rules={[
-              {
-                required: true,
-                message: "Please input description of your restaurant!",
-              },
-              asyncRule(validateName, "hahahah"),
-            ]}
-          >
-            <Input.TextArea />
-          </Form.Item>
-
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
+            <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </FormWrapper>
       </InnerFormDivCreateRestaurant>
     </div>
   );

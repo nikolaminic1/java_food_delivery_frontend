@@ -14,4 +14,15 @@ export const RestaurantsListDiv = styled(Row)`
 export const InnerFormDivCreateRestaurant = styled.div`
   width: 50%;
   margin-left: 25%;
+  background-color: #ffffff42;
+  padding: 40px;
+  border-radius: 30px;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
 `;
+
+export const FormWrapper = styled.div``;

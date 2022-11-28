@@ -24,12 +24,10 @@ export const createImageSlice = createSlice({
       })
       .addCase(createImageService.fulfilled, (state, action) => {
         state.status = Status.SUCCEED;
-        console.log(action.payload.data);
-        state.restaurants = action.payload.data.business;
       })
       .addCase(createImageService.rejected, (state, action) => {
         state.status = Status.REJECTED;
-        state.error = action.error.message || null;
+        // state.error = action.error.message || null;
       });
   },
 });

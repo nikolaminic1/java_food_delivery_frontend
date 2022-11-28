@@ -1,12 +1,9 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { ThunkAction } from "@reduxjs/toolkit";
 import store, { RootState } from "../../../store";
-import {
-  createImageService,
-  createRestaurantService,
-} from "../../../service/restaurants/createImageService";
+import { createRestaurantService } from "../../../service/restaurants/createRestaurantService";
 
-export const createRestaurant = (data: any) => {
+export const createRestaurant = (data: object) => {
   console.log(data);
 
   return async () => {

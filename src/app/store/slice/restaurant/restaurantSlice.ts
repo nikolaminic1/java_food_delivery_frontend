@@ -23,8 +23,7 @@ export const restaurantSlice = createSlice({
       })
       .addCase(getRestaurantsService.fulfilled, (state, action) => {
         state.status = Status.SUCCEED;
-        console.log(action.payload.data);
-        state.restaurants = action.payload.data.business;
+        // state.restaurants = action.payload.data.business;
       })
       .addCase(getRestaurantsService.rejected, (state, action) => {
         state.status = Status.REJECTED;

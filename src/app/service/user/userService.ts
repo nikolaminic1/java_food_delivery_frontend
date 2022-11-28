@@ -9,6 +9,8 @@ export const authorizeUser = createAsyncThunk("", async (data: object) => {
     console.log("before login service");
     const response = await loginApi().post("", data);
     console.log("after login service");
+    console.log(response);
+
     const res = (await response.data) as JWTResponseModel;
     return res;
   } catch (err) {

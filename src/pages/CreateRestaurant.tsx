@@ -29,27 +29,32 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
-  Schema.warning = function (error) {
-    console.log(error);
-  };
-
-  const asyncRule = (fn: any, message: any) => {
+  const asyncRule = (fn: any | null, message: any | null) => {
     return {
       validator: fn,
       message,
     };
   };
 
-  const validateName = (_: any, value: any) => {
+  const validateName = (_: any | null, value: any | null) => {
     console.log("validate");
+    console.log(_);
+    console.log(value);
+    console.log(typeof value);
     return new Promise((resolve, reject) => {
       value
         ? resolve(() => {
             console.log("resolve");
           })
-        : reject(new Error("Should accept agreement"));
+        : reject(() => {
+            console.log(value);
+            console.log(typeof value);
+            if (value === undefined) {
+              console.log(typeof value);
+              new Error("Should accept agreement");
+            }
+          });
     });
-    // value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
   };
 
   const onClick = (values: any) => {
@@ -99,7 +104,7 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
 
   const onFinish = (values: object) => {
     console.log(values);
-    // dispatch(createRestaurant(values));
+    dispatch(createRestaurant(values));
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -166,7 +171,7 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
           >
             <Form.Item
               label="Restaurant name"
-              name="restaurant_name"
+              name="name"
               rules={[asyncRule(validateName, "This field is required")]}
             >
               <Input />

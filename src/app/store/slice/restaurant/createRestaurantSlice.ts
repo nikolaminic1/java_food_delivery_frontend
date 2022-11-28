@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialRestaurantsState } from "../../../initial_state/restaurant";
-import { createRestaurantService } from "../../../service/restaurants/createImageService";
+import { createRestaurantService } from "../../../service/restaurants/createRestaurantService";
 import { Status } from "../../../service/Status";
 
-export const createImageSlice = createSlice({
-  name: "createImage",
+export const createRestaurantSlice = createSlice({
+  name: "createRestaurant",
   initialState: initialRestaurantsState,
   reducers: {},
   extraReducers: (builder) => {
@@ -14,7 +14,7 @@ export const createImageSlice = createSlice({
       })
       .addCase(createRestaurantService.fulfilled, (state, action) => {
         state.status = Status.SUCCEED;
-        console.log(action.payload);
+        console.log(action);
         // state.restaurants = action.payload.data.business;
       })
       .addCase(createRestaurantService.rejected, (state, action) => {
@@ -24,5 +24,5 @@ export const createImageSlice = createSlice({
   },
 });
 
-const reducer = createImageSlice.reducer;
+const reducer = createRestaurantSlice.reducer;
 export default reducer;

@@ -15,25 +15,25 @@ interface LoginProps {}
 
 const Login: FC<LoginProps> = ({}): ReactElement => {
   const dispatch = useAppDispatch();
-  const isAuthenticated = useAppSelector(
-    (state: RootState) => state.user.isAuthenticated
-  );
+  // const isAuthenticated = useAppSelector(
+  //   (state: RootState) => state.user.isAuthenticated
+  // );
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(isAuthenticated);
-    if (isAuthenticated) {
-      return navigate("/");
-    }
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   console.log(isAuthenticated);
+  //   if (isAuthenticated) {
+  //     return navigate("/");
+  //   }
+  // }, [isAuthenticated]);
 
-  useEffect(() => {
-    console.log(isAuthenticated);
-    if (isAuthenticated) {
-      return navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log(isAuthenticated);
+  //   if (isAuthenticated) {
+  //     return navigate("/");
+  //   }
+  // }, []);
 
   const onFinish = (values: any) => {
     let username = values.username;

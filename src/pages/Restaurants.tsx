@@ -3,6 +3,12 @@ import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { RestaurantModel } from "../app/models/RestaurantModel";
 import { getRestaurants } from "../app/store/actions/restaurant/restaurantActions";
+import RestaurantListSingleComponent from "./RestListItem";
+import {
+  InnerRestaurantsDiv,
+  MainRestaurantsDiv,
+  RestaurantsListDiv,
+} from "./style/RestaurantStyle";
 
 interface RestaurantsProps {}
 
@@ -15,18 +21,16 @@ const Restaurants: FC<RestaurantsProps> = ({}): ReactElement => {
   }, []);
 
   return (
-    <div>
-      <p>Restaurants</p>
-      <div>
-        {/* {restaurants.map((restaurant, i) => {
-          return (
-            <div key={i}>
-              <h2>{restaurant.name}</h2>
-            </div>
-          );
-        })} */}
-      </div>
-    </div>
+    <MainRestaurantsDiv>
+      <InnerRestaurantsDiv>
+        <h1>Restaurants</h1>
+        <RestaurantsListDiv>
+          {restaurants.map((restaurant, i) => {
+            return <RestaurantListSingleComponent data={restaurant} key={i} />;
+          })}
+        </RestaurantsListDiv>
+      </InnerRestaurantsDiv>
+    </MainRestaurantsDiv>
   );
 };
 

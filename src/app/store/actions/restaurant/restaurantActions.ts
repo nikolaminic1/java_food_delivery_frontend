@@ -6,7 +6,6 @@ import { getRestaurantsService } from "../../../service/user/restaurantService";
 
 export const getRestaurants = () => {
   return async () => {
-    console.log("get restaursnts");
     await store.dispatch(getRestaurantsService());
   };
 };

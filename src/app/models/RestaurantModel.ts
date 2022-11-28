@@ -1,3 +1,5 @@
+import { Status } from "../service/Status";
+
 export interface RoleModel {
   roleName: string;
 }
@@ -5,10 +7,19 @@ export interface RoleModel {
 export interface RestaurantModel {
   id: number;
   name: string;
+  backgroundImage: string;
+  description: string;
+  isNonStop: string;
+  logoImage: string;
+  priceOfDelivery: 0;
+  productCategories: [];
+  status: string;
+  timeClose: string;
+  timeOpen: string;
 }
 
 export interface RestaurantsArrayModel {
-  status: string;
+  status: Status;
   error: string | null;
   restaurants: RestaurantModel[];
 }

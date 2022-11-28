@@ -11,27 +11,28 @@ import { getRestaurantsService } from "../../../service/user/restaurantService";
 import { initialRestaurantsState } from "../../../initial_state/restaurant";
 import { RestaurantsArrayModel } from "../../../models/RestaurantModel";
 import { Status } from "../../../service/Status";
+import { createImageService } from "../../../service/restaurants/createImageService";
 
-export const restaurantSlice = createSlice({
-  name: "jwt",
+export const createImageSlice = createSlice({
+  name: "createImage",
   initialState: initialRestaurantsState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getRestaurantsService.pending, (state, action) => {
+      .addCase(createImageService.pending, (state, action) => {
         state.status = Status.LOADING;
       })
-      .addCase(getRestaurantsService.fulfilled, (state, action) => {
+      .addCase(createImageService.fulfilled, (state, action) => {
         state.status = Status.SUCCEED;
         console.log(action.payload.data);
         state.restaurants = action.payload.data.business;
       })
-      .addCase(getRestaurantsService.rejected, (state, action) => {
+      .addCase(createImageService.rejected, (state, action) => {
         state.status = Status.REJECTED;
         state.error = action.error.message || null;
       });
   },
 });
 
-const reducer = restaurantSlice.reducer;
+const reducer = createImageSlice.reducer;
 export default reducer;

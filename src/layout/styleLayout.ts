@@ -6,7 +6,10 @@ const { Header, Content, Sider } = Layout;
 
 export const LayoutDiv = styled(Layout)`
   min-height: 100vh;
-  background: #fff;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  color: white;
+  padding-top: 60px;
 `;
 
 export const MainNavbarDiv = styled.div`
@@ -17,13 +20,24 @@ export const MainNavbarDiv = styled.div`
   height: 60px;
 `;
 
-export const NavbarLinkStyled = styled(NavLink)`
-  color: white;
+export const InnerNavbarDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 `;
 
 export const NavbarLinkItem = styled.li`
-  padding-left: 20px;
+  padding: 0 10px;
   color: white;
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+`;
+
+export const NavbarLinkStyled = styled(NavLink)`
+  color: #fff;
+  font-size: 16px;
 `;
 
 export const UnorderListStyled = styled.ul`
@@ -34,9 +48,11 @@ export const UnorderListStyled = styled.ul`
   height: 100%;
 `;
 
-export const InnerNavbarDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
+export const LogoDiv = styled.div`
+  padding-left: 15px;
+`;
+
+export const LogoLink = styled(NavLink)`
+  font-size: 40px;
+  color: white;
 `;

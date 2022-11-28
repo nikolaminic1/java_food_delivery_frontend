@@ -1,3 +1,5 @@
+import { Status } from "../service/Status";
+
 export interface RoleModel {
   roleName: string;
 }
@@ -11,7 +13,7 @@ export interface UserModel {
   accountNonExpired: boolean;
   credentialsNonExpired: boolean;
   accountNonLocked: boolean;
-  status: string;
+  status: Status;
   isAuthenticated: boolean;
 }
 
@@ -19,5 +21,5 @@ export interface JWTResponseModel {
   access_token: string;
   refresh_token: string;
   error: string | null;
-  status: string;
+  status: Status;
 }

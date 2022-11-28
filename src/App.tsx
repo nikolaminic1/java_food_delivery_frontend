@@ -13,6 +13,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import store from "./app/store";
 import { persistor } from "./app/store";
 import Restaurants from "./pages/Restaurants";
+import CreateRestaurant from "./pages/CreateRestaurant";
 
 function App() {
   return (
@@ -25,10 +26,11 @@ function App() {
                 <CLayout>
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route
+                      path="/create_restaurant"
+                      element={<CreateRestaurant />}
+                    />
                     <Route path="/restaurants" element={<Restaurants />} />
-
-                    {/* <Route path="users/*" element={<Login />} /> */}
-
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
                     <Route path={"*"} element={<NotFound />} />

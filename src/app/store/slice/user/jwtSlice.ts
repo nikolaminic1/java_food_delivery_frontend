@@ -8,6 +8,7 @@ import { initialJwtState, initialUserState } from "../../../initial_state/user";
 import { loginApi } from "../../../service/Api";
 import { authorizeUser, getUser } from "../../../service/user/userService";
 import store from "../../../store";
+import { Status } from "../../../service/Status";
 
 export const jwtSlice = createSlice({
   name: "jwt",
@@ -16,15 +17,13 @@ export const jwtSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(authorizeUser.pending, (state, action) => {
-        console.log("jwt slice pending");
-        state.status = "loading";
+        state.status = Status.LOADING;
       })
       .addCase(authorizeUser.fulfilled, (state, action) => {
-        state.status = "succeed";
-        console.log("jwt slice fulfilled");
+        state.status = Status.SUCCEED;
       })
       .addCase(authorizeUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status = Status.REJECTED;
         state.error = action.error.message || null;
       });
   },

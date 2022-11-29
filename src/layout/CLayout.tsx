@@ -10,6 +10,7 @@ import {
   loginAction,
 } from "../app/store/actions/user/userActions";
 import Sidebar from "./Sidebar";
+import { windowSlice } from "../app/store/slice/window/windowSlice";
 
 interface CLayoutProps {
   title?: string;
@@ -21,7 +22,15 @@ const { Header, Content, Sider } = Layout;
 const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   const dispatch = useAppDispatch();
 
-  let w = window.innerWidth;
+  const width = useAppSelector((state: RootState) => {
+    return state.windowReducer.width;
+  });
+  useEffect(() => {
+    function handleResize() {
+      dispatch(windowSlice.actions.setDimensions());
+    }
+    window.addEventListener("resize", handleResize);
+  });
 
   // useEffect(() => {
   //   if (localStorage.getItem("access") !== "undefined") {
@@ -31,7 +40,7 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   // }, []);
   return (
     <div>
-      {w > 760 ? <Navbar /> : <Sidebar />}
+      {width > 760 ? <Navbar /> : <Sidebar />}
       <LayoutDiv>
         <Content>
           <div className="main-content-div">{children}</div>

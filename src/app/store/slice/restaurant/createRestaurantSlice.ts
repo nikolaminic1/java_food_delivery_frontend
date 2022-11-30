@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createAction } from "redux-actions";
 import { initialRestaurantsState } from "../../../initial_state/restaurant";
 import { createRestaurantService } from "../../../service/restaurants/createRestaurantService";
 import { Status } from "../../../service/Status";
@@ -9,12 +10,14 @@ export const createRestaurantSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createRestaurantService.pending, (state, action) => {
+      .addCase(createRestaurantService.pending, (state, payload) => {
         state.status = Status.LOADING;
       })
       .addCase(createRestaurantService.fulfilled, (state, action) => {
         state.status = Status.SUCCEED;
+        console.log("rest slice");
         console.log(action);
+
         // state.restaurants = action.payload.data.business;
       })
       .addCase(createRestaurantService.rejected, (state, action) => {

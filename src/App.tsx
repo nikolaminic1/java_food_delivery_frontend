@@ -14,6 +14,7 @@ import store from "./app/store";
 import { persistor } from "./app/store";
 import Restaurants from "./pages/Restaurants";
 import CreateRestaurant from "./pages/CreateRestaurant";
+import BecomeBusinessOwner from "./pages/BecomeBusinessOwner";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
                     <Route
                       path="/create_restaurant"
                       element={<CreateRestaurant />}
+                    />
+
+                    <Route
+                      path="/become_business_owner"
+                      element={<BecomeBusinessOwner />}
                     />
                     <Route path="/restaurants" element={<Restaurants />} />
                     <Route path="/signup" element={<SignUp />} />

@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useEffect, useState } from "react";
-import { Button, Form, Input, Select } from "antd";
+import { Button, Checkbox, Form, Input, Select } from "antd";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { message, Upload } from "antd";
 import type { UploadProps } from "antd";
@@ -11,15 +11,16 @@ import {
 } from "./style/RestaurantStyle";
 import TagFormRestaurantCreate from "../components/restaurant/TagFormRestaurantCreate";
 import Schema from "async-validator";
+import { RootState } from "../app/store";
 import {
+  CustomCheckbox,
+  CustomForm,
   CustomFormButton,
   CustomFormItem,
-  CustomFormItemButton,
   CustomFormItemInput,
   CustomFormItemInputTextArea,
   TextDivWrapper,
 } from "./style/BusinessOwner";
-import store, { RootState } from "../app/store";
 
 const { Option } = Select;
 
@@ -33,14 +34,16 @@ const tailLayout = {
 
 type LayoutType = Parameters<typeof Form>[0]["layout"];
 
-interface CreateRestaurantProps {}
+interface BecomeBusinessOwnerProps {}
 
-const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
+const BecomeBusinessOwner: FC<
+  BecomeBusinessOwnerProps
+> = ({}): ReactElement => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
+  const width = useAppSelector((state: RootState) => state.windowReducer.width);
   const [loading, setLoading] = useState(false);
   const [formLayout, setFormLayout] = useState<LayoutType>("horizontal");
-  const width = useAppSelector((state: RootState) => state.windowReducer.width);
 
   useEffect(() => {
     // add iniline horizontal vertiucal methods
@@ -51,6 +54,21 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
       setFormLayout("horizontal");
     }
   }, [width]);
+
+  const formItemLayout =
+    formLayout === "horizontal"
+      ? {
+          labelCol: { span: 8 },
+          wrapperCol: { span: 18 },
+        }
+      : null;
+
+  const buttonItemLayout =
+    formLayout === "horizontal"
+      ? {
+          wrapperCol: { span: 14, offset: 4 },
+        }
+      : null;
 
   const asyncRule = (fn: any | null, message: any | null) => {
     return {
@@ -70,6 +88,8 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
             console.log("resolve");
           })
         : reject(() => {
+            console.log(value);
+            console.log(typeof value);
             if (value === undefined) {
               console.log(typeof value);
               new Error("Should accept agreement");
@@ -124,32 +144,20 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   };
 
   const onFinish = (values: object) => {
-    store.dispatch(createRestaurant(values));
+    console.log(values);
+    dispatch(createRestaurant(values));
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
-  const formItemLayout =
-    formLayout === "horizontal"
-      ? {
-          labelCol: { span: 8 },
-          wrapperCol: { span: 18 },
-        }
-      : null;
-
   return (
     <div>
       <InnerFormDivCreateRestaurant>
         <TextDivWrapper>
-          <h4>Create restaurant</h4>
-          <p>
-            Your request for restaurant ownership is granted. Now you can enter
-            the name and description of your business. In steps after this one,
-            you will be allowed to add product categories, and products and view
-            your orders.
-          </p>
+          <h4>Apply request to become restaurant owner</h4>
+          <p>Apply request to become restaurant owner</p>
         </TextDivWrapper>
 
         <FormWrapper>
@@ -164,25 +172,51 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
             autoComplete="off"
           >
             <CustomFormItem
-              label="Restaurant name"
-              name="name"
+              label="Contact email"
+              name="contactEmail"
+              rules={[asyncRule(validateName, "This field is required")]}
+            >
+              <CustomFormItemInput className="input_item_form" />
+            </CustomFormItem>
+            <CustomFormItem
+              label="Contact phone"
+              name="contactPhone"
               rules={[asyncRule(validateName, "This field is required")]}
             >
               <CustomFormItemInput />
             </CustomFormItem>
             <CustomFormItem
-              label="Restaurant description"
-              name="description"
+              label="Business registration number"
+              name="businessRegistrationNumber"
+              rules={[asyncRule(validateName, "This field is required")]}
+            >
+              <CustomFormItemInput />
+            </CustomFormItem>
+
+            <CustomFormItem
+              label="About request"
+              name="request"
               rules={[asyncRule(validateName, "This field is required")]}
             >
               <CustomFormItemInputTextArea />
             </CustomFormItem>
 
-            <CustomFormItemButton wrapperCol={{ offset: 0, span: 24 }}>
+            <CustomFormItem
+              rules={[
+                {
+                  required: true,
+                  message: "Please agree to terms and service",
+                },
+              ]}
+            >
+              <CustomCheckbox>Agree to terms and service</CustomCheckbox>
+            </CustomFormItem>
+
+            <CustomFormItem wrapperCol={{ offset: 0, span: 24 }}>
               <CustomFormButton type="primary" htmlType="submit">
-                Next
+                Submit
               </CustomFormButton>
-            </CustomFormItemButton>
+            </CustomFormItem>
           </Form>
         </FormWrapper>
       </InnerFormDivCreateRestaurant>
@@ -190,4 +224,4 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   );
 };
 
-export default CreateRestaurant;
+export default BecomeBusinessOwner;

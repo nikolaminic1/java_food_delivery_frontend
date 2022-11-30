@@ -23,6 +23,9 @@ export const createImageSlice = createSlice({
         state.status = Status.LOADING;
       })
       .addCase(createImageService.fulfilled, (state, action) => {
+        console.log("image slice");
+        console.log(action);
+
         state.status = Status.SUCCEED;
       })
       .addCase(createImageService.rejected, (state, action) => {

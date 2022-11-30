@@ -7,6 +7,7 @@ import {
   RestaurantModel,
   RestaurantsArrayModel,
 } from "../../models/RestaurantModel";
+import { ResponseModel } from "../../models/Request";
 
 export const createRestaurantService = createAsyncThunk(
   "",
@@ -15,9 +16,14 @@ export const createRestaurantService = createAsyncThunk(
 
     try {
       const response = await genericApi().post("/business/owner/save", data);
+      console.log(response.data);
+
+      return (await response.data) as ResponseModel;
     } catch (err) {
       console.log(err);
       throw Error;
     }
   }
 );
+
+export const updateRestaurantService = createAsyncThunk("", async () => {});

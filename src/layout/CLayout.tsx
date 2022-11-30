@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useEffect } from "react";
+import React, { FC, ReactElement, useEffect, useState } from "react";
 import { Layout } from "antd";
 import Navbar from "./Navbar";
 import { LayoutDiv } from "./styleLayout";
@@ -21,6 +21,7 @@ const { Header, Content, Sider } = Layout;
 
 const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   const dispatch = useAppDispatch();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const width = useAppSelector((state: RootState) => {
     return state.windowReducer.width;
@@ -32,6 +33,10 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
     window.addEventListener("resize", handleResize);
   });
 
+  useEffect(() => {
+    console.log(sidebarOpen);
+  }, [sidebarOpen]);
+
   // useEffect(() => {
   //   if (localStorage.getItem("access") !== "undefined") {
   //     console.log(localStorage.getItem("access"));
@@ -40,7 +45,11 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   // }, []);
   return (
     <div>
-      {width > 760 ? <Navbar /> : <Sidebar />}
+      {/* {width > 760 ? (
+        <Navbar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      ) : (
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      )} */}
       <LayoutDiv>
         <Content>
           <div className="main-content-div">{children}</div>

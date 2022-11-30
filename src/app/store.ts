@@ -10,6 +10,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import jwtSlice from "./store/slice/user/jwtSlice";
 import userSlice from "./store/slice/user/userSlice";
 import restaurantSlice from "./store/slice/restaurant/restaurantSlice";
+import { windowReducer, windowSlice } from "./store/slice/window/windowSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   jwt: jwtSlice,
   user: userSlice,
   restaurants: restaurantSlice,
+  windowReducer: windowReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

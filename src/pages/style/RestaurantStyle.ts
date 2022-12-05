@@ -11,6 +11,10 @@ export const RestaurantsListDiv = styled(Row)`
   color: white;
 `;
 
+export const OuterFormDivCreateRestaurant = styled.div`
+  padding-top: 100px;
+`;
+
 export const InnerFormDivCreateRestaurant = styled.div`
   width: 50%;
   margin-left: 25%;
@@ -26,3 +30,7 @@ export const InnerFormDivCreateRestaurant = styled.div`
 `;
 
 export const FormWrapper = styled.div``;
+
+export const MainMyRestaurantDiv = styled.div`
+  padding-top: 100px;
+`;

@@ -15,6 +15,10 @@ import { persistor } from "./app/store";
 import Restaurants from "./pages/Restaurants";
 import CreateRestaurant from "./pages/CreateRestaurant";
 import BecomeBusinessOwner from "./pages/BecomeBusinessOwner";
+import UploadLogo from "./pages/UploadLogo";
+import UploadBackground from "./pages/UploadBackground";
+import AddBusienssHours from "./pages/AddBusienssHours";
+import MyRestaurant from "./pages/MyRestaurant";
 
 function App() {
   return (
@@ -36,6 +40,17 @@ function App() {
                       path="/become_business_owner"
                       element={<BecomeBusinessOwner />}
                     />
+                    <Route path="/upload_logo" element={<UploadLogo />} />
+                    <Route
+                      path="/upload_background"
+                      element={<UploadBackground />}
+                    />
+                    <Route
+                      path="/update_business_hours"
+                      element={<AddBusienssHours />}
+                    />
+                    <Route path="/my_restaurant" element={<MyRestaurant />} />
+
                     <Route path="/restaurants" element={<Restaurants />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />

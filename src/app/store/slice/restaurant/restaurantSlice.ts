@@ -13,7 +13,7 @@ import { RestaurantsArrayModel } from "../../../models/RestaurantModel";
 import { Status } from "../../../service/Status";
 
 export const restaurantSlice = createSlice({
-  name: "jwt",
+  name: "getRestaurants",
   initialState: initialRestaurantsState,
   reducers: {},
   extraReducers: (builder) => {

@@ -1,4 +1,10 @@
-import { JWTResponseModel, RoleModel, UserModel } from "../models/UserModel";
+import {
+  JWTResponseModel,
+  RoleModel,
+  UserModel,
+  UserModelObject,
+  UserStateResponseModel,
+} from "../models/UserModel";
 import { Status } from "../service/Status";
 
 const initialRoleState: RoleModel = {
@@ -18,6 +24,13 @@ const initialUserState: UserModel = {
   isAuthenticated: false,
 };
 
+const initialUserStateResponseModel: UserStateResponseModel = {
+  status: Status.IDLE,
+  user: initialUserState,
+  message: "",
+  isAuthenticated: false,
+};
+
 const initialJwtState: JWTResponseModel = {
   access_token: "",
   refresh_token: "",
@@ -25,4 +38,9 @@ const initialJwtState: JWTResponseModel = {
   status: Status.IDLE,
 };
 
-export { initialJwtState, initialRoleState, initialUserState };
+export {
+  initialJwtState,
+  initialRoleState,
+  initialUserState,
+  initialUserStateResponseModel,
+};

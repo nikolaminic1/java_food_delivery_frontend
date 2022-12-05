@@ -8,12 +8,12 @@ export const loginAction = (data: object) => {
   return async () => {
     console.log("login action");
     await store.dispatch(authorizeUser(data));
+    await store.dispatch(getUser());
   };
 };
 
 export const getUserAction = () => {
   return async () => {
-    console.log("get user action");
     await store.dispatch(getUser());
   };
 };

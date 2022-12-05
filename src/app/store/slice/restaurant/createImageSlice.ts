@@ -12,10 +12,11 @@ import { initialRestaurantsState } from "../../../initial_state/restaurant";
 import { RestaurantsArrayModel } from "../../../models/RestaurantModel";
 import { Status } from "../../../service/Status";
 import { createImageService } from "../../../service/restaurants/createImageService";
+import { initialStateRestaurantRequest } from "../../../initial_state/my_restaurant";
 
 export const createImageSlice = createSlice({
   name: "createImage",
-  initialState: initialRestaurantsState,
+  initialState: initialStateRestaurantRequest,
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -25,7 +26,8 @@ export const createImageSlice = createSlice({
       .addCase(createImageService.fulfilled, (state, action) => {
         console.log("image slice");
         console.log(action);
-
+        state.isBackgroundUploaded = true;
+        state.isLogoUploaded = true;
         state.status = Status.SUCCEED;
       })
       .addCase(createImageService.rejected, (state, action) => {

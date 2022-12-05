@@ -8,14 +8,17 @@ import {
   RestaurantsArrayModel,
 } from "../../models/RestaurantModel";
 
-export const getRestaurantsService = createAsyncThunk("", async () => {
-  try {
-    const response = await genericApi().get("/business/list");
-    console.log(response);
+export const getRestaurantsService = createAsyncThunk(
+  "/business/list",
+  async () => {
+    try {
+      const response = await genericApi().get("/business/list");
+      console.log(response);
 
-    return response.data;
-  } catch (err) {
-    console.log(err);
-    throw Error;
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      throw Error;
+    }
   }
-});
+);

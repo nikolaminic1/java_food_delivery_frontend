@@ -9,3 +9,8 @@ export interface ResponseModel {
   statusCode: number;
   timeStamp: string;
 }
+
+export interface ValidationErrors {
+  errorMessage: string;
+  field_errors: Record<string, string>;
+}

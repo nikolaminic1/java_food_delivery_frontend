@@ -37,4 +37,8 @@ export const MainFormLoginDiv = styled.div`
   left: 50%;
   top: 35%;
   transform: translateX(-50%) translateY(-30%);
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
 `;

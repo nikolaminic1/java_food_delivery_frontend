@@ -23,3 +23,13 @@ export interface JWTResponseModel {
   error: string | null;
   status: Status;
 }
+
+export interface UserModelObject {
+  user: UserModel;
+}
+export interface UserStateResponseModel {
+  status: Status;
+  user: UserModel;
+  message: string;
+  isAuthenticated: boolean;
+}

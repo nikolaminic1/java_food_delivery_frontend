@@ -26,6 +26,7 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   const width = useAppSelector((state: RootState) => {
     return state.windowReducer.width;
   });
+
   useEffect(() => {
     function handleResize() {
       dispatch(windowSlice.actions.setDimensions());
@@ -33,9 +34,9 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
     window.addEventListener("resize", handleResize);
   });
 
-  useEffect(() => {
-    console.log(sidebarOpen);
-  }, [sidebarOpen]);
+  // useEffect(() => {
+  //   console.log(sidebarOpen);
+  // }, [sidebarOpen]);
 
   // useEffect(() => {
   //   if (localStorage.getItem("access") !== "undefined") {
@@ -43,6 +44,7 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   //     dispatch(getUserAction());
   //   }
   // }, []);
+
   return (
     <div>
       {/* {width > 760 ? (

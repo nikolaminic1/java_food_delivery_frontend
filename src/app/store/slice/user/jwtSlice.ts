@@ -20,11 +20,13 @@ export const jwtSlice = createSlice({
         state.status = Status.LOADING;
       })
       .addCase(authorizeUser.fulfilled, (state, action) => {
-        console.log(action);
         state.status = Status.SUCCEED;
+
         state.access_token = action.payload.access_token;
         state.refresh_token = action.payload.refresh_token;
-        console.log("jwt slice");
+
+        localStorage.setItem("access", action.payload.access_token);
+        localStorage.setItem("refresh", action.payload.refresh_token);
       })
       .addCase(authorizeUser.rejected, (state, action) => {
         state.status = Status.REJECTED;

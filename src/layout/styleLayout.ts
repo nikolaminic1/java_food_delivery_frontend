@@ -9,7 +9,6 @@ export const LayoutDiv = styled(Layout)`
   min-height: 100vh;
   background-color: #8bc6ec;
   background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
-  padding-top: 60px;
   color: white;
 `;
 

@@ -1,7 +1,8 @@
 import {
-  MyRestaurantRequest,
+  MyRestaurantResponse,
   MyRestaurantRequestCreation,
 } from "../models/MyRestaurant";
+import { Status } from "../service/Status";
 import { StatusModel } from "../service/StatusModel";
 
 const initialStateStatus: StatusModel = {
@@ -9,13 +10,25 @@ const initialStateStatus: StatusModel = {
   statusDesc: "",
 };
 
-const initialStateRestaurantRequest: MyRestaurantRequest = {};
-
 const initialStateRestaurantCreation: MyRestaurantRequestCreation = {
   id: 0,
   name: "",
   description: "",
-  status: initialStateStatus,
+};
+
+const initialStateRestaurantRequest: MyRestaurantResponse = {
+  data: { business: initialStateRestaurantCreation },
+  isCreated: false,
+  isBackgroundUploaded: false,
+  isLogoUploaded: false,
+  isBusinessTimeCreated: false,
+  devMessage: "",
+  message: "",
+  reason: "",
+  statusCode: 0,
+  timeStamp: "",
+  status: Status.IDLE,
+  error: "",
 };
 
 export {

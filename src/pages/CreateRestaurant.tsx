@@ -8,6 +8,7 @@ import { createRestaurant } from "../app/store/actions/restaurant/createRestaura
 import {
   FormWrapper,
   InnerFormDivCreateRestaurant,
+  OuterFormDivCreateRestaurant,
 } from "./style/RestaurantStyle";
 import TagFormRestaurantCreate from "../components/restaurant/TagFormRestaurantCreate";
 import Schema from "async-validator";
@@ -20,6 +21,7 @@ import {
   TextDivWrapper,
 } from "./style/BusinessOwner";
 import store, { RootState } from "../app/store";
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -41,6 +43,17 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   const [loading, setLoading] = useState(false);
   const [formLayout, setFormLayout] = useState<LayoutType>("horizontal");
   const width = useAppSelector((state: RootState) => state.windowReducer.width);
+  const isCreated = useAppSelector(
+    (state: RootState) => state.restaurantCreate.isCreated
+  );
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (isCreated) {
+      return navigate("/upload_background");
+    }
+  }, []);
 
   useEffect(() => {
     // add iniline horizontal vertiucal methods
@@ -60,10 +73,6 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
   };
 
   const validateName = (_: any | null, value: any | null) => {
-    console.log("validate");
-    console.log(_);
-    console.log(value);
-    console.log(typeof value);
     return new Promise((resolve, reject) => {
       value
         ? resolve(() => {
@@ -78,53 +87,12 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
     });
   };
 
-  const onClick = (values: any) => {
-    setLoading(true);
-    form
-      .validateFields()
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-  };
-
-  const props: UploadProps = {
-    name: "file",
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    headers: {
-      authorization: "authorization-text",
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
-
-  const onGenderChange = (value: string) => {
-    switch (value) {
-      case "male":
-        form.setFieldsValue({ note: "Hi, man!" });
-        return;
-      case "female":
-        form.setFieldsValue({ note: "Hi, lady!" });
-        return;
-      case "other":
-        form.setFieldsValue({ note: "Hi there!" });
-        break;
-      default:
-    }
-  };
-
   const onFinish = (values: object) => {
-    store.dispatch(createRestaurant(values));
+    const resultAction = dispatch(createRestaurant(values));
+    console.log(resultAction.then((res) => {}));
+    if (isCreated) {
+      return navigate("/upload_background");
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -140,7 +108,7 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
       : null;
 
   return (
-    <div>
+    <OuterFormDivCreateRestaurant>
       <InnerFormDivCreateRestaurant>
         <TextDivWrapper>
           <h4>Create restaurant</h4>
@@ -186,7 +154,7 @@ const CreateRestaurant: FC<CreateRestaurantProps> = ({}): ReactElement => {
           </Form>
         </FormWrapper>
       </InnerFormDivCreateRestaurant>
-    </div>
+    </OuterFormDivCreateRestaurant>
   );
 };
 

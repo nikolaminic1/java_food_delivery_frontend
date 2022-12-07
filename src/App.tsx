@@ -19,6 +19,11 @@ import UploadLogo from "./pages/UploadLogo";
 import UploadBackground from "./pages/UploadBackground";
 import AddBusienssHours from "./pages/AddBusienssHours";
 import MyRestaurant from "./pages/MyRestaurant";
+import AboutMyRestaurant from "./pages/AboutMyRestaurant";
+import ProductsMyRestaurant from "./pages/ProductsMyRestaurant";
+import OrdersMyRestaurant from "./pages/OrdersMyRestaurant";
+import MyRestaurantProfile from "./pages/MyRestaurantProfile";
+import CategoriesMyRestaurant from "./pages/CategoriesMyRestaurant";
 
 function App() {
   return (
@@ -49,7 +54,17 @@ function App() {
                       path="/update_business_hours"
                       element={<AddBusienssHours />}
                     />
-                    <Route path="/my_restaurant" element={<MyRestaurant />} />
+                    <Route path="/my_restaurant">
+                      <Route index={true} element={<MyRestaurant />} />
+                      <Route path="about" element={<AboutMyRestaurant />} />
+                      <Route path="categories">
+                        <Route
+                          index={true}
+                          element={<CategoriesMyRestaurant />}
+                        ></Route>
+                      </Route>
+                      <Route path="orders" element={<OrdersMyRestaurant />} />
+                    </Route>
 
                     <Route path="/restaurants" element={<Restaurants />} />
                     <Route path="/signup" element={<SignUp />} />

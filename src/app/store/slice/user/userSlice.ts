@@ -27,6 +27,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.rejected, (state, action) => {
         state.status = Status.REJECTED;
+        console.log("get user rejected");
       });
   },
 });

@@ -38,12 +38,12 @@ const CLayout: FC<CLayoutProps> = ({ title, children }): ReactElement => {
   //   console.log(sidebarOpen);
   // }, [sidebarOpen]);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("access") !== "undefined") {
-  //     console.log(localStorage.getItem("access"));
-  //     dispatch(getUserAction());
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("access") !== undefined) {
+      console.log(localStorage.getItem("access"));
+      dispatch(getUserAction());
+    }
+  }, []);
 
   return (
     <div>

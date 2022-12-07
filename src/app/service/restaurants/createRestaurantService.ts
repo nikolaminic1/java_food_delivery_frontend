@@ -76,3 +76,43 @@ export const uploadBackgroundImage = createAsyncThunk(
     }
   }
 );
+
+export const createCategory = createAsyncThunk(
+  "/business/product/product_categories/save",
+  async (data: object) => {
+    console.log(data);
+
+    try {
+      const response = await genericApi().patch(
+        "/business/product/product_categories/save",
+        data
+      );
+      console.log(response.data);
+
+      return (await response.data) as ResponseModel;
+    } catch (err) {
+      console.log(err);
+      throw Error;
+    }
+  }
+);
+
+export const uploadCategoryImage = createAsyncThunk(
+  "/business/product/product_categories/image",
+  async (data: object) => {
+    console.log(data);
+
+    try {
+      const response = await genericApi().patch(
+        "/business/product/product_categories/image_save",
+        data
+      );
+      console.log(response.data);
+
+      return (await response.data) as ResponseModel;
+    } catch (err) {
+      console.log(err);
+      throw Error;
+    }
+  }
+);
